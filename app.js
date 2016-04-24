@@ -27,6 +27,11 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+// recourse for verify the existence of an email (accessed at GET http://localhost:8080/api/signup/?email=user_email)
+router.get('/signup', function(req, res) {
+    res.json({ message: req.query.email });   
+});
+
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
