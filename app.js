@@ -27,13 +27,26 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+
+router.route('/signup')
+
 // recourse for verify the existence of an email (accessed at GET http://localhost:8080/api/signup/?email=user_email)
-router.get('/signup', function(req, res) {
+.get(function(req, res) {
     
     var verify = require('./controllers/verify');
-    //res.json({ message: req.query.email }); 
     var checkEmail = verify.checkEmail;
-    checkEmail(res, req.query.email)
+    checkEmail(res, req.query.email);
+    
+});
+
+router.route('/signup')
+
+// recourse for register an user (accessed at POST http://localhost:8080/api/signup/)
+.post(function(req, res) {
+    
+    var register = require('./controllers/register'); 
+    var registerUser = register.registerUser;
+    registerUser(res, req.body);
     
 });
 
