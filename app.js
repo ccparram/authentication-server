@@ -29,7 +29,12 @@ router.get('/', function(req, res) {
 
 // recourse for verify the existence of an email (accessed at GET http://localhost:8080/api/signup/?email=user_email)
 router.get('/signup', function(req, res) {
-    res.json({ message: req.query.email });   
+    
+    var verify = require('./controllers/verify');
+    //res.json({ message: req.query.email }); 
+    var checkEmail = verify.checkEmail;
+    checkEmail(res, req.query.email)
+    
 });
 
 
