@@ -8,10 +8,13 @@ module.exports.checkEmail = function (res, email) {
   if(isEMailAddr(email)){
     console.log("is email");
     
-    request('http://ix.cs.uoregon.edu:3000/users', function (error, response, body) {
+    request('http://ix.cs.uoregon.edu:3000/users?email=' + email, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         
         var success = JSON.parse(body).success;
+        
+        console.log(success);
+        console.log(body);
       
         if(success){
           res.status(200).json(
