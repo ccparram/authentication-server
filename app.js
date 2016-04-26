@@ -51,6 +51,16 @@ router.route('/signup')
 });
 
 
+router.route('/validate')
+
+// recourse for register an user (accessed at GET http://localhost:8080/api/validate/)
+.get(function(req, res) {
+    
+    var validate = require('./controllers/validate'); 
+    var validateUser = validate.validateUser;
+    validateUser(res, req.body);
+});
+
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
