@@ -33,8 +33,8 @@ $ node app.js
 
   {
     "success": true,
-    "id": "user email",
-    "message": "msg"
+    "id": "user_email",
+    "message": "You can not use this email"
   }
 
   Email does not exist in the database:
@@ -44,8 +44,19 @@ $ node app.js
 
   {
     "success": false,
-    "id": "user email",
-    "message": "msg"
+    "id": "user_email",
+    "message": "You can use this email"
+  }
+  
+  It is not an email:
+
+  HTTP/1.1 400 OK
+  Content-Type: application/json
+
+  {
+    "success": false,
+    "id": "user_email",
+    "message": "This is not a email"
   }
     ```
 
