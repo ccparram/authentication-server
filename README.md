@@ -4,7 +4,7 @@ This page represents the latest published version of Authetication Server API
 #### Install project
 
 ```
-$ nmp install
+$ npm install
 ```
 
 #### Execute project
@@ -19,33 +19,33 @@ $ node app.js
     API call
 
     ```javascript
-  GET /api/signup/?email={user_email} HTTP/1.1
+  GET /api/verify/?email={user_email} HTTP/1.1
   Host: ix.cs.uoregon.edu:3555
     ```
 
     API response
 
     ```json
-  Email exists in database:
-
-  HTTP/1.1 200 OK
-  Content-Type: application/json
-
-  {
-    "success": true,
-    "id": "user_email",
-    "message": "You can not use this email"
-  }
-
   Email does not exist in the database:
 
   HTTP/1.1 200 OK
   Content-Type: application/json
 
   {
-    "success": false,
-    "id": "user_email",
+    "success": true,
+    "email": "user_email",
     "message": "You can use this email"
+  }
+  
+  Email exists in database:
+
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+
+  {
+    "success": false,
+    "email": "user_email",
+    "message": "You can not use this email"
   }
   
   It is not an email:
@@ -55,7 +55,7 @@ $ node app.js
 
   {
     "success": false,
-    "id": "user_email",
+    "email": "user_email",
     "message": "This is not a email"
   }
     ```
@@ -65,7 +65,7 @@ $ node app.js
     API call
     ```json
 
-  POST /api/signup/ HTTP/1.1
+  POST /api/register HTTP/1.1
   Host: ix.cs.uoregon.edu:3555
   Content-Type: application/json
 
@@ -82,8 +82,7 @@ $ node app.js
       {
         "ID" : "32bbvs",
         "base64" : "aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="
-      }],
-    "externalID" : "skjdjfb87u345k"
+      }]
   }
     ```
     API response
@@ -95,9 +94,9 @@ $ node app.js
   User registered successfully:
 
     {
-      "userId": "a@b.c",
+      "email": "user_email",
       "success": true,
-      "error" : null
+      "message" : "User registered successfully"
     }
 
   HTTP/1.1 200 OK
@@ -106,9 +105,9 @@ $ node app.js
   The user could not be registered:
 
     {
-      "UserId": "a@b.c",
+      "email": "user_email",
       "success": false,
-      "error" : "Error message"
+      "message" : "User was not registered"
     }
     ```
 
@@ -131,27 +130,27 @@ $ node app.js
   The user was validated successfully:
 
     {
-      "userId": "email user",
+      "email": "email user",
       "externalID": "id external user",
       "success": "true",
-      "error" : null
+      "message" : null
     }
 
   The user was not validated successfully:
 
     {
-      "userId": "email user",
+      "email": "email user",
       "externalID": "id external user",
       "success": "false",
-      "error" : "Error message"
+      "message" : "Error message"
     }
 
   The user does not exists en database:
 
     {
-      "userId": "email user",
+      "email": "email user",
       "externalID": null,
       "success": "false",
-      "error" : null
+      "message" : null
     }
     ```

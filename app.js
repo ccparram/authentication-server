@@ -24,11 +24,11 @@ app.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    res.json({ message: 'Yupi! Welcome to our Authentication Server API!' });   
 });
 
 
-router.route('/signup')
+router.route('/verify')
 
 // recourse for verify the existence of an email (accessed at GET http://localhost:8080/api/signup/?email=user_email)
 .get(function(req, res) {
@@ -39,15 +39,15 @@ router.route('/signup')
     
 });
 
-router.route('/signup')
+router.route('/register')
 
-// recourse for register an user (accessed at POST http://localhost:8080/api/signup/)
+// recourse for register an user (accessed at POST http://localhost:8080/api/register/)
 .post(function(req, res) {
     
     var register = require('./controllers/register'); 
     var registerUser = register.registerUser;
-    registerUser(res, req.body);
     
+    registerUser(res, req.body);
 });
 
 

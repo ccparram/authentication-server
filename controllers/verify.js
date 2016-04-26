@@ -3,24 +3,18 @@ module.exports.checkEmail = function (res, email) {
   
   var request = require('request');
   
-  console.log("Check: " + email);
-  
   if(isEMailAddr(email)){
-    console.log("is email");
     
     request('http://ix.cs.uoregon.edu:3000/users?email=' + email, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         
         var success = JSON.parse(body).success;
-        
-        console.log(success);
-        console.log(body);
       
         if(success){
           res.status(200).json(
             {
               "success": true,
-              "id": email,
+              "email": email,
               "message": "You can use this email"
             });
         }
@@ -28,7 +22,7 @@ module.exports.checkEmail = function (res, email) {
           res.status(200).json(
             { 
               "success": false,
-              "id": email,
+              "email": email,
               "message": "You can not use this email"
             });
         }
@@ -41,7 +35,7 @@ module.exports.checkEmail = function (res, email) {
     res.status(400).json(
       {
         "success": false,
-        "id": email,
+        "email": email,
         "message": "This is not a email"
       });
   }
