@@ -60,7 +60,7 @@ $ node app.js
   }
     ```
 
-- ##### Register User:
+- ##### Register:
 
     API call
     ```json
@@ -111,46 +111,54 @@ $ node app.js
     }
     ```
 
-- ##### Validate User:
+- ##### Authenticate:
 
     API call
     ```javascript
-  POST /api/validate HTTP/1.1
+  POST /api/authenticate HTTP/1.1
   Host: ix.cs.uoregon.edu:3555
+  Content-Type: application/json
 
-  email={email_user}
-  password={password_user}
+  {
+    "email": "email user",,
+    "password": "password",
+    "picture" : "base64" : "eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="
+  }
     ```
 
     API response
     ```json
+    
+  The user was authenticated successfully:
+  
   HTTP/1.1 200 OK
   Content-Type: application/json
 
-  The user was validated successfully:
-
     {
       "email": "email user",
-      "externalID": "id external user",
       "success": "true",
-      "message" : null
+      "message" : "User authenticated successfully"
     }
 
-  The user was not validated successfully:
+  The user was not authenticated successfully:
+  
+  HTTP/1.1 200 OK
+  Content-Type: application/json
 
     {
       "email": "email user",
-      "externalID": "id external user",
       "success": "false",
-      "message" : "Error message"
+      "message" : "User was not authenticated successfully"
     }
 
-  The user does not exists en database:
+  The user does not exists in database:
+  
+  HTTP/1.1 401 OK
+  Content-Type: application/json
 
     {
       "email": "email user",
-      "externalID": null,
       "success": "false",
-      "message" : null
+      "message" : "User does not exists in database"
     }
     ```
