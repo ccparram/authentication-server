@@ -93,22 +93,22 @@ $ node app.js
 
   User registered successfully:
 
-    {
-      "email": "user_email",
-      "success": true,
-      "message" : "User registered successfully"
-    }
+  {
+    "email": "user_email",
+    "success": true,
+    "message" : "User registered successfully"
+  }
 
   HTTP/1.1 200 OK
   Content-Type: application/json
 
   The user could not be registered:
 
-    {
-      "email": "user_email",
-      "success": false,
-      "message" : "User was not registered"
-    }
+  {
+    "email": "user_email",
+    "success": false,
+    "message" : "User was not registered"
+  }
     ```
 
 - ##### Authenticate:
@@ -120,9 +120,9 @@ $ node app.js
   Content-Type: application/json
 
   {
-    "email": "email user",,
+    "email": "user_email",,
     "password": "password",
-    "picture" : "base64" : "eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="
+    "picture" : "eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="
   }
     ```
 
@@ -134,31 +134,31 @@ $ node app.js
   HTTP/1.1 200 OK
   Content-Type: application/json
 
-    {
-      "email": "email user",
-      "success": "true",
-      "message" : "User authenticated successfully"
-    }
+  {
+    "email": "user_email",
+    "success": true,
+    "message" : "User authenticated successfully"
+  }
 
   The user was not authenticated successfully:
   
   HTTP/1.1 200 OK
   Content-Type: application/json
 
-    {
-      "email": "email user",
-      "success": "false",
-      "message" : "User was not authenticated successfully"
-    }
+  {
+    "email": "user_email",
+    "success": false,
+    "message" : "User was not authenticated successfully"
+  }
 
-  The user does not exists in database:
+  The email does not exists in database or incorrect password:
   
   HTTP/1.1 401 OK
   Content-Type: application/json
 
-    {
-      "email": "email user",
-      "success": "false",
-      "message" : "User does not exists in database"
-    }
+  {
+    "email": "user_email",
+    "success": false,
+    "message" : "The email or password was incorrect"
+  }
     ```
