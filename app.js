@@ -24,27 +24,27 @@ app.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'Yupi! Welcome to our Authentication Server API!' });   
+    res.json({ message: 'Yupi! Welcome to our Authentication Server API!' });
 });
 
 
 router.route('/verify')
 
-// recourse for verify the existence of an email (accessed at GET http://localhost:8080/api/signup/?email=user_email)
+// recourse for verify the existence of an email (accessed at GET http://localhost:8080/api/verify/?email=user_email)
 .get(function(req, res) {
-    
+
     var verify = require('./controllers/verify');
     var checkEmail = verify.checkEmail;
     checkEmail(res, req.query.email);
-    
+
 });
 
 router.route('/register')
 
 // recourse for register an user (accessed at POST http://localhost:8080/api/register/)
 .post(function(req, res) {
-    
-    var register = require('./controllers/register'); 
+
+    var register = require('./controllers/register');
     var registerUser = register.registerUser;
     registerUser(res, req.body);
 });
@@ -52,10 +52,10 @@ router.route('/register')
 
 router.route('/authenticate')
 
-// recourse for register an user (accessed at POST http://localhost:8080/api/validate/)
+// recourse for register an user (accessed at POST http://localhost:8080/api/authenticate/)
 .post(function(req, res) {
-    
-    var authenticate = require('./controllers/authenticate'); 
+
+    var authenticate = require('./controllers/authenticate');
     var authenticateUser = authenticate.authenticateUser;
     authenticateUser(res, req.body);
 });
