@@ -50,7 +50,7 @@ $ node app.js
   
   It is not an email:
 
-  HTTP/1.1 400 OK
+  HTTP/1.1 400 BAD REQUEST
   Content-Type: application/json
 
   {
@@ -153,7 +153,7 @@ $ node app.js
 
   The email does not exists in database or incorrect password:
   
-  HTTP/1.1 401 OK
+  HTTP/1.1 401 UNAUTHORIZED
   Content-Type: application/json
 
   {
