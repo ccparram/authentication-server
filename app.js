@@ -46,19 +46,18 @@ router.route('/register')
     
     var register = require('./controllers/register'); 
     var registerUser = register.registerUser;
-    
     registerUser(res, req.body);
 });
 
 
-router.route('/validate')
+router.route('/authenticate')
 
-// recourse for register an user (accessed at GET http://localhost:8080/api/validate/)
-.get(function(req, res) {
+// recourse for register an user (accessed at POST http://localhost:8080/api/validate/)
+.post(function(req, res) {
     
-    var validate = require('./controllers/validate'); 
-    var validateUser = validate.validateUser;
-    validateUser(res, req.body);
+    var authenticate = require('./controllers/authenticate'); 
+    var authenticateUser = authenticate.authenticateUser;
+    authenticateUser(res, req.body);
 });
 
 // REGISTER OUR ROUTES -------------------------------

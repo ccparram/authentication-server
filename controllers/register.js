@@ -5,9 +5,11 @@ var email;
 var password;
 var res_client;
 var gender;
+var res_client;
 
 module.exports.registerUser = function (res, data_user) {
   
+  //Set response to client
   res_client = res;
   
   name = data_user.name;
