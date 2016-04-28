@@ -1,5 +1,7 @@
 ## Authetication Server API
-This page represents the latest published version of Authetication Server API
+This page represents the latest published version of Authetication Server API.
+
+The project can be downloaded from https://github.com/ccparram/authentication-server
 
 #### Install project
 
@@ -36,7 +38,7 @@ $ node app.js
     "email": "user_email",
     "message": "You can use this email"
   }
-  
+
   Email exists in database:
 
   HTTP/1.1 200 OK
@@ -47,7 +49,7 @@ $ node app.js
     "email": "user_email",
     "message": "You can not use this email"
   }
-  
+
   It is not an email:
 
   HTTP/1.1 400 BAD REQUEST
@@ -128,9 +130,9 @@ $ node app.js
 
     API response
     ```json
-    
+
   The user was authenticated successfully:
-  
+
   HTTP/1.1 200 OK
   Content-Type: application/json
 
@@ -141,7 +143,7 @@ $ node app.js
   }
 
   The user was not authenticated successfully:
-  
+
   HTTP/1.1 200 OK
   Content-Type: application/json
 
@@ -152,7 +154,7 @@ $ node app.js
   }
 
   The email does not exists in database or incorrect password:
-  
+
   HTTP/1.1 401 UNAUTHORIZED
   Content-Type: application/json
 
