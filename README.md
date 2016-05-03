@@ -115,6 +115,8 @@ $ node app.js
 
 - ##### Authenticate:
 
+  # Is a demo, not working totally
+
     API call
     ```javascript
   POST /api/authenticate HTTP/1.1
