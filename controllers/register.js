@@ -1,108 +1,82 @@
 var request = require('request');
 
-var name;
-var email;
-var password;
-var res_client;
-var gender;
 var res_client;
 
-module.exports.registerUser = function (res, data_user) {
+module.exports.registerUser = function (res, jsonPictures) {
 
   //Set response to client
   res_client = res;
 
-  name = data_user.name;
-  email = data_user.email;
-  password = data_user.password;
-  gender = data_user.gender;
-
-  requestTrainingFacilitator();
+  requestRegisterFacilitator(jsonPictures);
 
 };
 
 
-function requestTrainingFacilitator(){
-
-  //TODO request to Facilitator
-
-  //TODO Set res.success & externalID
-  var success = true;
-
-  externalID = "externaID_" + email;
-
-  //TODO Control valid images to send to Database
-
-  picture = {"picture" : [
-      {
-      "ID" : "12345",
-      "base64" : "eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="
-      },
-      {
-      "ID" : "32bbvs",
-      "base64" : "aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="
-      }
-      ]}
-
-  if(success){
-    //Request to register user in Database
-    requestRegisterDatabase(externalID, picture);
-  }
-  else{
-    responseToClient(success);
-  }
-
-}
-
-function requestRegisterDatabase(externalID, picture){
-
-  //TODO request to Facilitator
-
+function requestRegisterFacilitator(jsonPictures){
+  
   var options = {
-  uri: 'http://ix.cs.uoregon.edu:3000/users',
-  method: 'POST',
-  headers: {
-        'Content-Type': 'application/json'
-    },
-  json: {
-      "name" : name,
-      "email" : email,
-      "password" : password,
-      "gender" : gender,
-      picture,
-      "externalID" : externalID
-    }
-};
+    uri: 'http://ix.cs.uoregon.edu:{facilitatorPort}/register',
+    method: 'POST',
+    headers: {
+          'Content-Type': 'application/json'
+      },
+    json: jsonPictures
+  };
 
   request(options, function (error, response, body) {
+    
   if (!error && response.statusCode == 200) {
-    var success = JSON.parse(body).success;
-    responseToClient(success);
-  }
-});
+    jsonFacilitator = JSON.parse(body);
+    var success = jsonFacilitator.success;
+    var facilitatorIds = jsonFacilitator.jsonFacilitator;
+    
+    var jsonToDataBase = {
+    "facilitatorIds": facilitatorIds,
+    "jsonPictures": jsonPictures
+    };
+    
+    
+    
+    requestRegisterDatabase(jsonToDataBase);
+    
+  }else{
+    jsonFacilitator = JSON.parse(body);
+    requestClient(jsonFacilitator);
+    }
+  });
+  
 }
 
-function responseToClient(success){
+function requestRegisterDatabase(jsonToDataBase){
+  
+  var options = {
+    uri: 'http://ix.cs.uoregon.edu:{dataBasePort}/register',
+    method: 'POST',
+    headers: {
+          'Content-Type': 'application/json'
+      },
+    json: jsonToDataBase
+  };
 
-  if(success){
-
-    json_response = {
-      "email": email,
-      "success": success,
-      "message" : "User registered successfully"
+  request(options, function (error, response, body) {
+    
+  if (!error && response.statusCode == 200) {
+    jsonDataBase = JSON.parse(body);
+    var success = jsonDataBase.success;
+    
+    if(success){
+      requestClient(jsonDataBase); 
+    }else{
+      requestClient(jsonDataBase);
     }
-
-    res_client.status(200).json(json_response);
-  }
-  else{
-
-    json_response = {
-      "email": email,
-      "success": success,
-      "message" : "User was not registered"
+    
+    
+  }else{ 
     }
+  });
 
-    res_client.status(200).json(json_response);
-  }
+}
+
+function requestClient(){
 
 }
