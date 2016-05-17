@@ -1,4 +1,5 @@
 var request = require('request');
+var urls = require('./urls');
 
 var res_client;
 
@@ -6,7 +7,7 @@ module.exports.registerUser = function (res, jsonPictures) {
 
   //Set response to client
   res_client = res;
-
+  
   requestRegisterFacilitator(jsonPictures);
 
 };
@@ -15,14 +16,14 @@ module.exports.registerUser = function (res, jsonPictures) {
 function requestRegisterFacilitator(jsonPictures){
   
   var options = {
-    uri: 'http://ix.cs.uoregon.edu:{facilitatorPort}/register',
+    uri: urls.facilitator + '/register',
     method: 'POST',
     headers: {
           'Content-Type': 'application/json'
       },
     json: jsonPictures
   };
-
+  
   request(options, function (error, response, body) {
     
   if (!error && response.statusCode == 200) {
@@ -50,7 +51,7 @@ function requestRegisterFacilitator(jsonPictures){
 function requestRegisterDatabase(jsonToDataBase){
   
   var options = {
-    uri: 'http://ix.cs.uoregon.edu:{dataBasePort}/register',
+    uri: urls.database + '/register',
     method: 'POST',
     headers: {
           'Content-Type': 'application/json'
