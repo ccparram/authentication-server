@@ -23,7 +23,7 @@ function requestRegisterFacilitator(jsonPictures){
       },
     json: jsonPictures
   };
-  
+ /* 
   request(options, function (error, response, body) {
     
   if (!error && response.statusCode == 200) {
@@ -45,6 +45,30 @@ function requestRegisterFacilitator(jsonPictures){
     requestClient(jsonFacilitator);
     }
   });
+  */
+  
+  jsonToDataBase = {
+	"facilitatorIds": [
+    {
+      "facId": "696c3ecd355c03bf86ad029a68b931cd", 	
+      "facType": "fpp"					 
+    },
+    {
+   	  "facId": "768dad68asf7sd87f6s8adds87f6", 		
+      "facType": "microsoft"						
+    }
+  	],
+	"pictures": [
+	    {   "pictureId" : 1,
+	        "base64": "asdnasljdbjasbsdkajbflksbfkasbfhfa"
+	    }, 	
+	    {"pictureId" : 2,
+	    "base64" : "Baseojdasfjbsjodsjabfkjbsadkñfjh"
+	    }
+    ]    
+};
+
+requestRegisterDatabase(jsonToDataBase);
   
 }
 
@@ -61,14 +85,15 @@ function requestRegisterDatabase(jsonToDataBase){
 
   request(options, function (error, response, body) {
     
+    
   if (!error && response.statusCode == 200) {
-    jsonDataBase = JSON.parse(body);
-    var success = jsonDataBase.success;
+    
+    var success = body.success;
     
     if(success){
-      requestClient(jsonDataBase); 
+      requestClient(body); 
     }else{
-      requestClient(jsonDataBase);
+      requestClient(body);
     }
     
     
@@ -78,6 +103,8 @@ function requestRegisterDatabase(jsonToDataBase){
 
 }
 
-function requestClient(){
+function requestClient(responseToClient){
+  
+  res_client.json(responseToClient);
 
 }
