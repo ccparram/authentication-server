@@ -32,14 +32,17 @@ function requestRegisterFacilitator(jsonPicturesFromClient){
     
     var success = jsonResponseFromFacilitator.success;
     
+    
     if(success){
     
-      var facilitatorIds = jsonResponseFromFacilitator.jsonFacilitator;
+      var facilitatorIds = jsonResponseFromFacilitator.facilitatorIds;
       
       var jsonToDataBase = {
-      "facilitatorIds": facilitatorIds,
-      "jsonPictures": jsonPicturesFromClient
+      "facilitatorIds" : facilitatorIds,
+      "pictures" : jsonPicturesFromClient.pictures
       };
+      
+      
       
       requestRegisterDatabase(jsonToDataBase);
       
@@ -67,6 +70,7 @@ function requestRegisterDatabase(jsonToDataBase){
       },
     json: jsonToDataBase
   };
+  
 
   request(options, function (error, response, body) {
     
