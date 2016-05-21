@@ -9,7 +9,7 @@ module.exports.registerUser = function (res, jsonPicturesFromClient) {
   res_client = res;
   
   requestRegisterFacilitator(jsonPicturesFromClient);
-
+  
 };
 
 
@@ -22,13 +22,13 @@ function requestRegisterFacilitator(jsonPicturesFromClient){
           'Content-Type': 'application/json'
       },
     json: jsonPicturesFromClient
-  };
+  };  
   
   request(options, function (error, response, body) {
     
     
   if (!error && response.statusCode == 200) {
-    jsonResponseFromFacilitator = JSON.parse(body);
+    jsonResponseFromFacilitator = body;
     
     var success = jsonResponseFromFacilitator.success;
     
@@ -43,11 +43,16 @@ function requestRegisterFacilitator(jsonPicturesFromClient){
       
       requestRegisterDatabase(jsonToDataBase);
       
+      
       }
       else{
         requestClient(jsonResponseFromFacilitator);
         }
     }
+    else{
+      console.log("error in Facilitator" + response);
+    }
+    
   });
   
 }
@@ -65,7 +70,6 @@ function requestRegisterDatabase(jsonToDataBase){
 
   request(options, function (error, response, body) {
     
-    
   if (!error && response.statusCode == 200) {
     
     var success = body.success;
@@ -78,6 +82,7 @@ function requestRegisterDatabase(jsonToDataBase){
     
     
   }else{ 
+    console.log("error in Database" + response);
     }
   });
 
@@ -85,6 +90,7 @@ function requestRegisterDatabase(jsonToDataBase){
 
 function requestClient(responseToClient){
   
+  console.log("response to client");
   res_client.json(responseToClient);
 
 }
