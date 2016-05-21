@@ -51,14 +51,14 @@ router.route('/register')
 });
 
 
-router.route('/authenticate')
+router.route('/login')
 
 // recourse for register an user (accessed at POST http://localhost:{8080}/authenticate/)
 .post(function(req, res) {
 
-    var authenticate = require('./controllers/authenticate');
-    var authenticateUser = authenticate.authenticateUser;
-    authenticateUser(res, req.body);
+    var login = require('./controllers/login');
+    var loginUser = login.login;
+    loginUser(res, req.body);
 });
 
 // REGISTER OUR ROUTES -------------------------------
