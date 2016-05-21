@@ -3,17 +3,17 @@ var urls = require('./urls');
 
 var res_client;
 
-module.exports.registerUser = function (res, jsonPictures) {
+module.exports.registerUser = function (res, jsonPicturesFromClient) {
 
   //Set response to client
   res_client = res;
   
-  requestRegisterFacilitator(jsonPictures);
+  requestRegisterFacilitator(jsonPicturesFromClient);
 
 };
 
 
-function requestRegisterFacilitator(jsonPictures){
+function requestRegisterFacilitator(jsonPicturesFromClient){
   
   var options = {
     uri: urls.facilitator + '/register',
@@ -21,54 +21,34 @@ function requestRegisterFacilitator(jsonPictures){
     headers: {
           'Content-Type': 'application/json'
       },
-    json: jsonPictures
+    json: jsonPicturesFromClient
   };
- /* 
+  
   request(options, function (error, response, body) {
     
+    
   if (!error && response.statusCode == 200) {
-    jsonFacilitator = JSON.parse(body);
-    var success = jsonFacilitator.success;
-    var facilitatorIds = jsonFacilitator.jsonFacilitator;
+    jsonResponseFromFacilitator = JSON.parse(body);
     
-    var jsonToDataBase = {
-    "facilitatorIds": facilitatorIds,
-    "jsonPictures": jsonPictures
-    };
+    var success = jsonResponseFromFacilitator.success;
     
+    if(success){
     
-    
-    requestRegisterDatabase(jsonToDataBase);
-    
-  }else{
-    jsonFacilitator = JSON.parse(body);
-    requestClient(jsonFacilitator);
+      var facilitatorIds = jsonResponseFromFacilitator.jsonFacilitator;
+      
+      var jsonToDataBase = {
+      "facilitatorIds": facilitatorIds,
+      "jsonPictures": jsonPicturesFromClient
+      };
+      
+      requestRegisterDatabase(jsonToDataBase);
+      
+      }
+      else{
+        requestClient(jsonResponseFromFacilitator);
+        }
     }
   });
-  */
-  
-  jsonToDataBase = {
-	"facilitatorIds": [
-    {
-      "facId": "696c3ecd355c03bf86ad029a68b931cd", 	
-      "facType": "fpp"					 
-    },
-    {
-   	  "facId": "768dad68asf7sd87f6s8adds87f6", 		
-      "facType": "microsoft"						
-    }
-  	],
-	"pictures": [
-	    {   "pictureId" : 1,
-	        "base64": "asdnasljdbjasbsdkajbflksbfkasbfhfa"
-	    }, 	
-	    {"pictureId" : 2,
-	    "base64" : "Baseojdasfjbsjodsjabfkjbsadkñfjh"
-	    }
-    ]    
-};
-
-requestRegisterDatabase(jsonToDataBase);
   
 }
 
