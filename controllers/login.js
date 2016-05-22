@@ -17,6 +17,8 @@ module.exports.login = function (res, jsonFromClient) {
   picture = jsonFromClient.picture;
 
   var jsonToDataBase = {"userId" : userId};
+  
+  console.log("");
 
   //Request to Database for verify email & password
   requestDatabase(jsonToDataBase);
@@ -76,6 +78,8 @@ function requestLoginFacilitator(jsonWithFacilitatorsIds){
   };
 
   request(options, function (error, response, body) {
+    
+    console.log("error " + error + "response: " + response + "body" + body);
     
   if (!error && response.statusCode == 200) {
         

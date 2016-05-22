@@ -8,6 +8,8 @@ module.exports.registerUser = function (res, jsonPicturesFromClient) {
   //Set response to client
   res_client = res;
   
+  console.log("json with pictures");
+  
   requestRegisterFacilitator(jsonPicturesFromClient);
   
 };
