@@ -68,6 +68,7 @@ function requestLoginFacilitator(jsonWithFacilitatorsIds){
                       "picture" : picture
                     };      
 
+
   var options = {
     uri: urls.facilitator + '/login',
     method: 'POST',

@@ -29,6 +29,7 @@ function requestRegisterFacilitator(jsonPicturesFromClient){
   request(options, function (error, response, body) {
     
     
+    
   if (!error && response.statusCode == 200) {
     jsonResponseFromFacilitator = body;
     
