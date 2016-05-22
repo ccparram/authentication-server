@@ -18,7 +18,7 @@ module.exports.login = function (res, jsonFromClient) {
 
   var jsonToDataBase = {"userId" : userId};
   
-  console.log("");
+  console.log("userId recibido " + userId);
 
   //Request to Database for verify email & password
   requestDatabase(jsonToDataBase);
@@ -39,6 +39,7 @@ function requestDatabase(jsonToDataBase){
     json: jsonToDataBase
   };
   
+  console.log("jsonToDatabase " + jsonToDataBase);
 
   request(options, function (error, response, body) {
     
@@ -68,7 +69,6 @@ function requestLoginFacilitator(jsonWithFacilitatorsIds){
                       "picture" : picture
                     };      
 
-
   var options = {
     uri: urls.facilitator + '/login',
     method: 'POST',
@@ -77,6 +77,8 @@ function requestLoginFacilitator(jsonWithFacilitatorsIds){
       },
     json: jsonToFacilitator
   };
+  
+  console.log("jsonToFacilitator " + jsonToFacilitator);
 
   request(options, function (error, response, body) {
     
