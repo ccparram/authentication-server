@@ -29,18 +29,6 @@ router.get('/', function(req, res) {
     res.json({ message: 'Yupi! Welcome to our Authentication Server API!' });
 });
 
-
-router.route('/verify')
-
-// recourse for verify the existence of an email (accessed at GET http://localhost:{port}/verify/?email=user_email)
-.get(function(req, res) {
-
-    var verify = require('./controllers/verify');
-    var checkEmail = verify.checkEmail;
-    checkEmail(res, req.query.email);
-
-});
-
 router.route('/register')
 
 // recourse for register an user (accessed at POST http://localhost:{port}/register/)
@@ -54,7 +42,7 @@ router.route('/register')
 
 router.route('/login')
 
-// recourse for register an user (accessed at POST http://localhost:{8080}/authenticate/)
+// recourse for login an user (accessed at POST http://localhost:{8080}/authenticate/)
 .post(function(req, res) {
 
     var login = require('./controllers/login');

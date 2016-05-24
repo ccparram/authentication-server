@@ -5,15 +5,12 @@ var res_client;
 
 module.exports.registerUser = function (res, jsonPicturesFromClient) {
 
-  //Set response to client
   res_client = res;
   
   console.log("json with pictures");
   
-  requestRegisterFacilitator(jsonPicturesFromClient);
-  
+  requestRegisterFacilitator(jsonPicturesFromClient);  
 };
-
 
 function requestRegisterFacilitator(jsonPicturesFromClient){
   
@@ -27,15 +24,12 @@ function requestRegisterFacilitator(jsonPicturesFromClient){
   };  
   
   request(options, function (error, response, body) {
-    
-    
-    
+
   if (!error && response.statusCode == 200) {
     jsonResponseFromFacilitator = body;
     
     var success = jsonResponseFromFacilitator.success;
-    
-    
+  
     if(success){
     
       var facilitatorIds = jsonResponseFromFacilitator.facilitatorIds;
@@ -45,22 +39,18 @@ function requestRegisterFacilitator(jsonPicturesFromClient){
       "pictures" : jsonPicturesFromClient.pictures
       };
       
-      
-      
       requestRegisterDatabase(jsonToDataBase);
-      
-      
-      }
-      else{
+
+     }
+     else{
         requestClient(jsonResponseFromFacilitator);
         }
-    }
-    else{
-      console.log("error in Facilitator" + response);
-    }
+   }
+   else{
+     console.log("error in Facilitator" + response);
+   }
     
   });
-  
 }
 
 function requestRegisterDatabase(jsonToDataBase){
@@ -74,7 +64,6 @@ function requestRegisterDatabase(jsonToDataBase){
     json: jsonToDataBase
   };
   
-
   request(options, function (error, response, body) {
     
   if (!error && response.statusCode == 200) {

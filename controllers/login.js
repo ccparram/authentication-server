@@ -4,13 +4,7 @@ var res_client;
 var picture;
 
 module.exports.login = function (res, jsonFromClient) {
-  
-  //jsonFromClient   {
-	//                  userId : "96cb7a81a34dd088",
-	//                  picture : "==asdnasljdbjasbj"
-  //                 }
-  
-  //Set response to client
+
   res_client = res;
   
   var userId = jsonFromClient.userId;
@@ -52,8 +46,7 @@ function requestDatabase(jsonToDataBase){
     }else{
       responseClient(body);
     }
-    
-    
+      
   }else{ 
     console.log("error in Database" + response);
     }
@@ -95,10 +88,7 @@ function requestLoginFacilitator(jsonWithFacilitatorsIds){
   
 }
   
-  
-
 function responseClient(jsonToClient){
-
+  
     res_client.status(200).json(jsonToClient);
-    
-  }
+    }
